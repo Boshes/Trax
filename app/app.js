@@ -5,3 +5,5 @@ new Vue({
   el: '#app',
   components: { App }
 })
+
+Vue.use(require('./plugins/spinner'))

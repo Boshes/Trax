@@ -57,12 +57,12 @@ module.exports = {
     //     NODE_ENV: JSON.stringify('production')
     //   }
     // }),
-		new webpack.optimize.UglifyJsPlugin({
-				compressor: {
-						warnings: false
-				},
-				mangle: true
-		}),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 		compressor: {
+		// 				warnings: false
+		// 		},
+		// 		mangle: true
+		// }),
 		new webpack.ProvidePlugin({
 			$: "jquery",
 			jQuery: "jquery",
@@ -73,7 +73,6 @@ module.exports = {
 	resolve:{
 		alias: {
 			'vue$': 'vue/dist/vue.js',
-			'bootstrap-css': 'bootstrap/dist/css/bootstrap.css',
 			'vue-material': 'vue-material/dist/vue-material.css'
   	}
 	}

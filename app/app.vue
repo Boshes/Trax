@@ -1,38 +1,47 @@
 <script>
 import Vue from 'vue'
 import 'vue-material'
-import 'bootstrap-css'
+// import 'bootstrap-css'
 
-var AdapterMixin = require('./mixins/adapter')
+import { eventHub } from './event.js'
 var GameMixin = require('./mixins/game')
 
-var vue = Vue.extend({
+export default {
 	name: 'Main',
 	components: {
 		setup: require('./components/setup.vue'),
 		game: require('./components/game.vue')
 	},
-	mixins: [AdapterMixin,GameMixin],
+	mixins: [GameMixin],
 	data: function () {
 		return {
-
+			currentView: '',
+			genre: null
 		}
 	},
-	computed: {},
-	created: function () {
+	computed: {
 	},
-	methods: {},
-	events: {}
-})
-
-module.exports = vue
+	created: function () {
+		this.currentView = 'setup'
+		eventHub.$on('start game', function(genre){
+			this.genre = genre
+			this.toggleView()
+		}.bind(this))
+	},
+	methods: {
+		'toggleView': function(){
+			this.currentView = this.currentView === 'setup' ? 'game' : 'setup'
+		}
+	}
+}
 </script>
 
 <template lang="jade">
 #vue-app
 	#vue-wrapper
 		.container-fluid
-			h5.text-center TODO
+			h5.text-center Trax
+			component(:is='currentView', :genre='genre')
 </template>
 
 <style lang="stylus">
