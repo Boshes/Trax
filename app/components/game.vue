@@ -34,8 +34,7 @@ export default {
 	watch: {
 		'albumsReady':function(){
 			if(this.albumsReady == true){
-				console.log("ready")
-				this.getAlbumTracks()
+				this.getAlbumTracks(this.albums)
 			}
 		}
 	}
@@ -45,11 +44,10 @@ export default {
 <template lang="jade">
 #game
 	.container-fluid
-		pre {{genre}}
-		pre {{collection}}
-		//spinner(v-if='!isReady')
+		md-spinner.center-block(md-indeterminate, v-if='!isReady')
 		div(v-if='isReady')
-			h5.text-center Derp
+			h5.text-center {{artist.name}}
+			pre {{collection}}
 			
 </template>
 

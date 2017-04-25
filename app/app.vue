@@ -1,7 +1,6 @@
 <script>
 import Vue from 'vue'
-import 'vue-material'
-// import 'bootstrap-css'
+import 'vue-material-css'
 
 import { eventHub } from './event.js'
 var GameMixin = require('./mixins/game')

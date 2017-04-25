@@ -73,7 +73,7 @@ module.exports = {
 	resolve:{
 		alias: {
 			'vue$': 'vue/dist/vue.js',
-			'vue-material': 'vue-material/dist/vue-material.css'
+			'vue-material-css': 'vue-material/dist/vue-material.css'
   	}
 	}
 }

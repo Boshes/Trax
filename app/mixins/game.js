@@ -22,7 +22,6 @@ var vue = {
 	      collection: [],
 	      artist: {},
 	      albums: [],
-	      tracks: [],
 	      isReady: false
 	  }  
 	},
@@ -33,9 +32,8 @@ var vue = {
 	    getArtistAlbums: function(genre){
 	        this.searchArtistAlbums(genre)
 	    },
-	    getAlbumTracks: function(album){
-	    	//use Promise.all method
-	    	this.searchAllTracks()
+	    getAlbumTracks: function(albums){
+	    	this.searchAllTracks(albums)
 	    }
 	}
 }

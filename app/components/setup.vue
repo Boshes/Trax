@@ -34,7 +34,7 @@ export default {
 	.container-fluid
 		.col-sm-12
 			ul(v-for='genre in genres')
-				li.col-sm-2(v-text='genre', v-on:click='selectGenre(genre)')
+				li.md-button.md-raised.col-sm-2(v-text='genre', v-on:click='selectGenre(genre)')
 		.col-sm-12(v-if='selectedGenre')
 			h4.col-sm-6 {{selectedGenre}}
 			button.col-sm-6.btn.btn-default.center-block(v-on:click='play') Lock In
