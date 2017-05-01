@@ -16,6 +16,7 @@ var vue = {
 	created: function(){
 	    this.$on('data ready', function(data){
 	        this.$set(this, this.$options.key, data)
+	        this.backgroundImage = 'url(' + this.artist.images[0].url + ')'
 	        this.isReady = true
 	    })
 	},
@@ -83,20 +84,34 @@ vue.methods.searchAllTracks = function(albums){
 }
 
 //Return Distinct Albums
+//might need more logic
 vue.methods.filterAlbums = function(albums){
-    var filteredAlbums = []
-    console.log("albums to filter", albums)
-    //TODO
-    // return filteredAlbums
-    return albums
+    var filteredAlbums = albums.filter((album, index, self) =>
+        self.findIndex((a) => {
+            return album.name.includes(a.name) && album.name.length === a.name.length
+        }) === index
+    )
+    console.log("original albums", albums, "filtered albums", filteredAlbums)
+    return filteredAlbums
 }
 
 //Return Distinct Tracks
+//might make it remove live tracks and other forms of "live" wording
 vue.methods.filterTracks = function(tracks){
-    var filteredTracks = [].concat.apply([], tracks)
-    console.log("tracks to filter", filteredTracks)
-    //TODO
-    this.$emit('data ready', filteredTracks)
+    var originalTracks = [].concat.apply([], tracks)
+    var filteredTracks = originalTracks.filter((track, index, self) => 
+        self.findIndex((t) => {
+            return track.name.includes(t.name) && track.name.length === t.name.length
+        }) === index
+    )
+    var i = 0
+    var availableTracks = []
+    while(i <4){
+        availableTracks.push(filteredTracks[Math.floor((Math.random() * filteredTracks.length), 0)])
+        i++
+    }
+    console.log("original", originalTracks, "filteredTracks", filteredTracks, "avaibleTracks", availableTracks)
+    this.$emit('data ready', availableTracks)
 }
 
 //- exports

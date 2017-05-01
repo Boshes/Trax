@@ -9,7 +9,7 @@ export default {
 	mixins: [GameMixin],
 	data: function () {
 		return {
-
+			
 		}
 	},
 	computed: {
@@ -36,6 +36,9 @@ export default {
 			if(this.albumsReady == true){
 				this.getAlbumTracks(this.albums)
 			}
+		},
+		'backgroundImage': function(){
+			eventHub.$emit('background', this.backgroundImage)
 		}
 	}
 }
@@ -45,10 +48,10 @@ export default {
 #game
 	.container-fluid
 		md-spinner.center-block(md-indeterminate, v-if='!isReady')
-		div(v-if='isReady')
-			h5.text-center {{artist.name}}
-			pre {{collection}}
-			
+		div.text-center(v-if='isReady')
+			span.md-display-4(style='background-color:white;') {{artist.name}}
+			div(v-for='(track, index) in availableTracks')
+				md-button.md-raised.dynamicButton.col-sm-3(v-text='track.name', v-on:click.native='answerTrack(track)')
 </template>
 
 <style lang="stylus">

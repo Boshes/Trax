@@ -19,13 +19,14 @@ var vue = {
 	  return{
 	      genres: ['Alternative Rock','Dubstep','Indie Rock','Industrial','Metal','Pop','Rap','Rock','Ska'],
 	      selectedGenre: null,
-	      collection: [],
+	      availableTracks: [],
 	      artist: {},
 	      albums: [],
+	      backgroundImage: 'url(./assets/lol.jpg)',
 	      isReady: false
 	  }  
 	},
-	key: 'collection',
+	key: 'availableTracks',
 	mixins: [AdapterMixin],
 	route: {},
 	methods: {
@@ -34,6 +35,24 @@ var vue = {
 	    },
 	    getAlbumTracks: function(albums){
 	    	this.searchAllTracks(albums)
+	    },
+	    answerTrack: function(track){
+	    	var popular = Math.max.apply(Math, this.availableTracks.map(function(track){
+	    		return track.popularity
+	    	}))
+	    	console.log(popular)
+	    	if(track.popularity === popular){
+	    		return this.winRound()
+	    	}
+	    	else{
+	    		return this.loseRound()
+	    	}
+	    },
+	    winRound: function(){
+	    	console.log("win")
+	    },
+	    loseRound: function(){
+	    	console.log("lose")
 	    }
 	}
 }

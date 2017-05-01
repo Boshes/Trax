@@ -21,7 +21,6 @@ export default {
 		},
 	    'play':function(){
 	        if(this.selectedGenre!=null){
-	        	console.log(this.selectedGenre, eventHub)
 	        	eventHub.$emit('start game', this.selectedGenre)
 	        }
 	    }
@@ -32,12 +31,13 @@ export default {
 <template lang="jade">
 #setup
 	.container-fluid
-		.col-sm-12
-			ul(v-for='genre in genres')
-				li.md-button.md-raised.col-sm-2(v-text='genre', v-on:click='selectGenre(genre)')
+		.col-sm-12.text-center
+			span.md-display-4(style='background-color:white;') Trax
+			div(v-for='genre in genres')
+				md-button.md-raised.dynamicButton.col-sm-2(v-text='genre', v-on:click.native='selectGenre(genre)')
 		.col-sm-12(v-if='selectedGenre')
 			h4.col-sm-6 {{selectedGenre}}
-			button.col-sm-6.btn.btn-default.center-block(v-on:click='play') Lock In
+			md-button.col-sm-6.md-raised.dynamicButton.center-block(v-on:click.native='play') Lock In
 </template>
 
 <style lang="stylus">
