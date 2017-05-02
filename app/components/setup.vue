@@ -33,10 +33,12 @@ export default {
 	.container-fluid
 		.col-sm-12.text-center
 			span.md-display-4(style='background-color:white;') Trax
-			div(v-for='genre in genres')
-				md-button.md-raised.dynamicButton.col-sm-2(v-text='genre', v-on:click.native='selectGenre(genre)')
-		.col-sm-12(v-if='selectedGenre')
-			h4.col-sm-6 {{selectedGenre}}
+		.col-sm-12.text-center.genreArea
+			.buttonArea(v-for='genre in genres')
+				md-button.md-raised.dynamicButton(v-text='genre', v-on:click.native='selectGenre(genre)', href='#playArea')
+		br
+		.col-sm-12(id='playArea', v-if='selectedGenre')
+			span.md-display-3.col-sm-6(v-text='selectedGenre')
 			md-button.col-sm-6.md-raised.dynamicButton.center-block(v-on:click.native='play') Lock In
 </template>
 

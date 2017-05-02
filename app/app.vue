@@ -1,5 +1,4 @@
 <script>
-import Vue from 'vue'
 import 'vue-material-css'
 import { eventHub } from './event.js'
 var GameMixin = require('./mixins/game')
@@ -28,10 +27,26 @@ export default {
 		eventHub.$on('background', function(background){
 			this.backgroundImage = background
 		}.bind(this))
+		eventHub.$on('timer', function(timer){
+			this.timer = timer
+		}.bind(this))
 	},
 	methods: {
 		'toggleView': function(){
 			this.currentView = this.currentView === 'setup' ? 'game' : 'setup'
+		},
+		'back': function(){
+			if(this.timer!=null){
+				this.clearBar()
+			}
+			this.$Progress.set(0)
+			this.genre = null
+			this.selectedGenre = null
+			this.availableTracks = []
+	    	this.artist = {}
+	    	this.albums = []
+			this.currentView = 'setup'
+			this.backgroundImage = 'url(./assets/lol.jpg)'
 		}
 	}
 }
@@ -39,8 +54,10 @@ export default {
 
 <template lang="jade">
 #vue-app
+	vue-progress-bar
 	#vue-wrapper.dynamicBackground(:style='{"background-image": backgroundImage }')
 		.container-fluid
+			i.material-icons(v-if='currentView=="game"', v-on:click='back') keyboard_backspace
 			transition(name='slide-fade')
 				component(:is='currentView', :genre='genre')
 	#vue-footer
@@ -70,19 +87,37 @@ html, body, #app
 	background-color #333
 	flex-shrink 0
 	color #eee
-	padding 20px
+	padding 5px
+.genreArea
+	display flex
+	flex-wrap wrap
+	justify-content center
 .md-button
 	text-transform none
+.buttonArea
+	width 30%
+	margin 1%
+.buttonArea:nth-oftype(3n)
+	margin-right 0
+.buttonArea:nth-of-type(3n+1)
+	margin-left 0
 .dynamicButton
 	background-color white
 	color #000
 	border-radius 10em
-	border 1px solid black
-	word-wrap break-word
+	border 1px solid #eee
+	word-wrap normal
+	white-space normal
+	width 250px
+	padding 10px
+.correct
+	border 1px solid green
+.wrong
+	border 1px solid red
 .slide-fade-enter-active
-	transition all .2s ease
+	transition all .5s ease
 .slide-fade-leave-active
-	transition all .2s cubic-bezier(1.0,0.5,0.8,1.0)
+	transition all .5s cubic-bezier(1.0,0.5,0.8,1.0)
 .slide-fade-enter, .slide-fade-leave-to
 	transform translateX(10px)
 	opacity 0
