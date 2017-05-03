@@ -117,6 +117,7 @@ html, body, #app
 		flex-direction row
 		flex-wrap wrap
 		height 500px
+		overflow-y scroll
 .buttonArea
 	width 30%
 	margin 1%
