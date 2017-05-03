@@ -20,7 +20,7 @@ var vue = {
 	},
 	data: function(){
 	  return{
-	      genres: ['Alternative Rock','Blues','Classical','Country','Drum and Bass','Dubstep','EDM','Emo','Folk','Funk','Grunge','Indie Rock','Industrial','Jazz','Metal','Metalcore','New Age','New Wave','Pop','Punk','Rap','Reggae','Rock','Ska','Soul'],
+	      genres: ['Alternative Rock','Blues','Classical','Country','Drum and Bass','Dubstep','EDM','Emo','Folk','Funk','Grunge','Indie Rock','Industrial','Jazz','Metal','Metalcore','New Age','New Wave','Pop','Progressive Metal','Punk','R&B','Rap','Reggae','Rock','Ska','Soul'],
 	      selectedGenre: null,
 	      availableTracks: [],
 	      artist: {},

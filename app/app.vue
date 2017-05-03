@@ -117,10 +117,7 @@ html, body, #app
 		flex-direction row
 		flex-wrap wrap
 		height 500px
-		overflow-y scroll
-		direction rtl
 .buttonArea
-	direction ltr
 	width 30%
 	margin 1%
 .buttonArea:nth-oftype(3n)
