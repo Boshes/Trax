@@ -1,11 +1,16 @@
 # Trax #
 
-Web Application with Vue which uses the Spotify API
+Web Application Game using Vue and the Spotify API
 
-## Demo ##
+
+## Aim ##
+
+Guess the most popular song by the random artist on screen to get points and high scores
+
+## Play ##
 https://boshes.github.io/Trax
 
 ### Details ###
-Web Application built with Vue and bundled with webpack.
+The application was built with Vue and bundled with Webpack
 
-Design uses Vue Material Design
+Design uses Bootstrap and Vue Material Design

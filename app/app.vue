@@ -30,23 +30,29 @@ export default {
 		eventHub.$on('timer', function(timer){
 			this.timer = timer
 		}.bind(this))
+		eventHub.$on('reset game', function(){
+			this.resetSettings()
+		}.bind(this))
 	},
 	methods: {
 		'toggleView': function(){
 			this.currentView = this.currentView === 'setup' ? 'game' : 'setup'
 		},
-		'back': function(){
+		'resetSettings': function(){
+			this.toggleView()
 			if(this.timer!=null){
 				this.clearBar()
 			}
+			this.isAnswered = false
+			this.albumsReady = false
+	    	this.gameFinished = false
 			this.$Progress.set(0)
 			this.genre = null
 			this.selectedGenre = null
 			this.availableTracks = []
 	    	this.artist = {}
 	    	this.albums = []
-			this.currentView = 'setup'
-			this.backgroundImage = 'url(./assets/lol.jpg)'
+			this.backgroundImage = 'url(./assets/background.jpg)'
 		}
 	}
 }
@@ -57,9 +63,10 @@ export default {
 	vue-progress-bar
 	#vue-wrapper.dynamicBackground(:style='{"background-image": backgroundImage }')
 		.container-fluid
-			i.material-icons(v-if='currentView=="game"', v-on:click='back') keyboard_backspace
+			i.material-icons.dynamicColor(v-if='currentView=="game"', v-on:click='resetSettings') keyboard_backspace
 			transition(name='slide-fade')
 				component(:is='currentView', :genre='genre')
+			br
 	#vue-footer
 		.container-fluid
 			.row.col-sm-12.text-center
@@ -83,48 +90,83 @@ html, body, #app
 	background-repeat no-repeat
 	background-position center
 	background-size cover
+	color white
 #vue-footer
 	background-color #333
 	flex-shrink 0
 	color #eee
 	padding 5px
-.genreArea
+.contentWrapper
 	display flex
-	flex-wrap wrap
+	flex-direction row
 	justify-content center
-.md-button
-	text-transform none
+	align-items center
+	align-content stretch
+	min-height 100%
+.contentArea
+	display flex
+	flex 1
+	flex-grow 1
+	flex-shrink 1
+	justify-content center
+	flex-direction column
+	overflow hidden
+	padding-left 0px
+	padding-right 0px
+	&.genreArea
+		flex-direction row
+		flex-wrap wrap
+		height 500px
+		overflow-y scroll
+		direction rtl
 .buttonArea
+	direction ltr
 	width 30%
 	margin 1%
 .buttonArea:nth-oftype(3n)
 	margin-right 0
 .buttonArea:nth-of-type(3n+1)
 	margin-left 0
+/*.dynamicColor*/
+/*	background-image inherit !important*/
+/*	color transparent !important*/
+/*	filter contrast(20%) saturate(20) brightness(150%)*/
+/*	-webkit-background-clip text !important*/
+/*	-webkit-filter contrast(20%) saturate(20) brightness(150%)*/
 .dynamicButton
-	background-color white
-	color #000
-	border-radius 10em
+	background-color transparent
 	border 1px solid #eee
-	word-wrap normal
-	white-space normal
-	width 250px
+	border-radius 10em
+	font-size 18px
 	padding 10px
+	width 300px
+	white-space normal
+	word-wrap normal
+	&.genreButton
+		width 200px
 .correct
 	border 1px solid green
 .wrong
 	border 1px solid red
+	align-content stretch
+.md-button
+	text-transform none
 .slide-fade-enter-active
-	transition all .5s ease
+	transition all .2s ease
 .slide-fade-leave-active
-	transition all .5s cubic-bezier(1.0,0.5,0.8,1.0)
+	transition all .2s cubic-bezier(1.0,0.5,0.8,1.0)
 .slide-fade-enter, .slide-fade-leave-to
 	transform translateX(10px)
 	opacity 0
+.scrollbar::-webkit-scrollbar-track
+	-webkit-box-shadow inset 0 0 6px rgba(0,0,0,0.3)
+	background-color #F5F5F5
+.scrollbar::-webkit-scrollbar
+	width 10px
+	background-color #F5F5F5
+.scrollbar::-webkit-scrollbar-thumb
+	background-color #0ae
+	background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, .2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, .2) 50%,rgba(255, 255, 255, .2) 75%,transparent 75%,transparent)
 [v-cloak]
 	display none!important
-.font-bold
-	font-weight bold
-.font-bold > span.small
-	margin-left 0.5em
 </style>
