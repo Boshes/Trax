@@ -1,6 +1,7 @@
 <script>
 import 'vue-material-css'
 import { eventHub } from './event.js'
+import Vibrant from 'node-vibrant'
 var GameMixin = require('./mixins/game')
 
 export default {
@@ -13,18 +14,23 @@ export default {
 	data: function () {
 		return {
 			currentView: '',
-			genre: null
+			genre: null,
+			bodyColor: null,
+			titleColor: null,
+			backColor: null
 		}
 	},
 	computed: {
 	},
 	created: function () {
 		this.currentView = 'setup'
+		this.dynamicColorChanger(this.backgroundImage)
 		eventHub.$on('start game', function(genre){
 			this.genre = genre
 			this.toggleView()
 		}.bind(this))
 		eventHub.$on('background', function(background){
+			this.dynamicColorChanger(background)
 			this.backgroundImage = background
 		}.bind(this))
 		eventHub.$on('timer', function(timer){
@@ -33,10 +39,26 @@ export default {
 		eventHub.$on('reset game', function(){
 			this.resetSettings()
 		}.bind(this))
+		console.log(this)
 	},
 	methods: {
 		'toggleView': function(){
 			this.currentView = this.currentView === 'setup' ? 'game' : 'setup'
+		},
+		'dynamicColorChanger': function(background){
+			var img = document.createElement('img')
+			img.setAttribute('src', background.substring(4, background.length-1))
+			img.crossOrigin = 'Anonymous'
+			img.addEventListener('load', function(img) {
+				var vibrant = new Vibrant(img)
+				vibrant.getPalette(function(err, palette){
+					console.log(this, palette)
+					this.bodyColor = palette['LightVibrant']!=null ? palette['LightVibrant'].getHex().toString() : palette['LightMuted'].getHex().toString()
+					this.titleColor = palette['Vibrant'] != null ? palette['Vibrant'].getHex().toString() : palette['Muted'].getHex().toString()
+					this.backColor = palette['DarkMuted'].getHex().toString()
+					this.backgroundReady = true
+				}.bind(this))
+			}.bind(this, img))
 		},
 		'resetSettings': function(){
 			this.toggleView()
@@ -53,6 +75,7 @@ export default {
 	    	this.artist = {}
 	    	this.albums = []
 			this.backgroundImage = 'url(./assets/background.jpg)'
+			this.dynamicColorChanger(this.backgroundImage)
 		}
 	}
 }
@@ -62,10 +85,10 @@ export default {
 #vue-app
 	vue-progress-bar
 	#vue-wrapper.dynamicBackground(:style='{"background-image": backgroundImage }')
-		.container-fluid
-			i.material-icons.dynamicColor(v-if='currentView=="game"', v-on:click='resetSettings') keyboard_backspace
+		.container-fluid(v-if='backgroundReady==true')
+			i.material-icons.backButton(v-if='currentView=="game"', v-on:click='resetSettings', :style='{"color": titleColor}') keyboard_backspace
 			transition(name='slide-fade')
-				component(:is='currentView', :genre='genre')
+				component(:is='currentView', :genre='genre', :body='bodyColor', :title='titleColor', :back='backColor', :ready='backgroundReady')
 			br
 	#vue-footer
 		.container-fluid
@@ -125,12 +148,10 @@ html, body, #app
 	margin-right 0
 .buttonArea:nth-of-type(3n+1)
 	margin-left 0
-/*.dynamicColor*/
-/*	background-image inherit !important*/
-/*	color transparent !important*/
-/*	filter contrast(20%) saturate(20) brightness(150%)*/
-/*	-webkit-background-clip text !important*/
-/*	-webkit-filter contrast(20%) saturate(20) brightness(150%)*/
+.backButton
+	margin-left 10px
+	margin-top 30px
+	transform scale(2)
 .dynamicButton
 	background-color transparent
 	border 1px solid #eee

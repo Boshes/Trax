@@ -20,6 +20,9 @@ export default {
 		console.log("the genre", this.genre)
 	    this.getArtistAlbums(this.genre)
 	    this.highScore = parseInt(localStorage.getItem('trax highscore'))
+	    if(isNaN(this.highScore)){
+	    	this.highScore = 0
+	    }
 	},
 	methods: {
 	    'choose':function(track){
@@ -31,6 +34,19 @@ export default {
 	props: {
 		'genre':{
 			type: String,
+			required: true
+		},
+		'body': {
+			required: true
+		},
+		'back': {
+			required: true
+		},
+		'title': {
+			required: true	
+		},
+		'ready':{
+			type: Boolean,
 			required: true
 		}
 	},
@@ -75,49 +91,50 @@ export default {
 <template lang="jade">
 #game
 	.container-fluid
-		md-spinner.center-block(md-indeterminate, style='margin: 0 auto;', v-if='!isReady')
+		md-spinner.center-block(md-indeterminate, style='margin: 0 auto;', v-if='!isReady || !ready', :style='{color: title}')
 		div.text-center
 			transition(name='slide-fade')
-				span.md-display-4.dynamicColor(v-if='isReady', v-text='artist.name')
+				span.md-display-4(v-if='isReady && ready', v-text='artist.name', :style='{color: title}')
 			transition(name='slide-fade')
-				md-speed-dial.md-fab-top-right(v-if='isReady', md-open="hover", md-direction="left", md-theme='light-blue')
+				md-speed-dial.md-fab-top-right(v-if='isReady && ready', md-open="hover", md-theme='light-blue', md-direction="left", :style='{color: title}')
 					md-button.md-fab(md-fab-trigger)
 						md-icon(md-icon-morph) info
 						md-icon info outline
 					md-button.md-fab-md-primary.md-mini-md-clean
 						md-icon search
 			br
+			br
 			.col-sm-12
 				.col-sm-6.pull-left
-					span.md-display-1.dynamicColor Points
+					span.md-display-1(:style='{color: title}') Points
 					br
-					i-odometer.dynamicColor(:value='points')
+					i-odometer(:value='points', :style='{color: body}')
 				.col-sm-6.pull-right
-					span.md-display-1.dynamicColor High Score
+					span.md-display-1(:style='{color: title}') High Score
 					br
-					i-odometer.dynamicColor(:value='highScore')
+					i-odometer(:value='highScore', :style='{color: body}')
 			br
 			transition(name='slide-fade')
-				div(v-if='isReady')
+				div(v-if='isReady && ready')
 					.col-sm-12.center-block
-						md-button.md-raised.dynamicButton.dynamicColor(v-text='availableTracks[0].name', v-on:click.once.native='answerTrack(availableTracks[0])')
+						md-button.md-raised(v-text='availableTracks[0].name', v-on:click.once.native='answerTrack(availableTracks[0])', :style='{color: body, backgroundColor: back}')
 					.col-sm-12.center-block
 						.col-sm-6
-							md-button.md-raised.dynamicButton.dynamicColor(v-text='availableTracks[1].name', v-on:click.once.native='answerTrack(availableTracks[1])')
+							md-button.md-raised.dynamicButton(v-text='availableTracks[1].name', v-on:click.once.native='answerTrack(availableTracks[1])', :style='{color: body, backgroundColor: back}')
 						.col-sm-6
-							md-button.md-raised.dynamicButton.dynamicColor(v-text='availableTracks[2].name', v-on:click.once.native='answerTrack(availableTracks[2])')
+							md-button.md-raised.dynamicButton(v-text='availableTracks[2].name', v-on:click.once.native='answerTrack(availableTracks[2])', :style='{color: body, backgroundColor: back}')
 					.col-sm-12.center-block
-						md-button.md-raised.dynamicButton.dynamicColor(v-text='availableTracks[3].name', v-on:click.once.native='answerTrack(availableTracks[3])')
+						md-button.md-raised.dynamicButton(v-text='availableTracks[3].name', v-on:click.once.native='answerTrack(availableTracks[3])', :style='{color: body, backgroundColor: back}')
 			br
-			.col-sm-12.text-center(v-if='isReady && gameFinished')
+			.col-sm-12.text-center(v-if='isReady && gameFinished && ready')
 				div(v-if='gameState==false')
 					.col-sm-6
-						md-button.md-raised.center-block.dynamicButton.dynamicColor(v-on:click.native='resetGame') Genre Selection
+						md-button.md-raised.center-block.dynamicButton(v-on:click.native='resetGame', :style='{color: body, backgroundColor: back}') Genre Selection
 					.col-sm-6
-						md-button.md-raised.center-block.dynamicButton.dynamicColor(v-on:click.native='retryGame') Retry with same genre
+						md-button.md-raised.center-block.dynamicButton(v-on:click.native='retryGame', :style='{color: body, backgroundColor: back}') Retry with same genre
 				div(v-if='gameState==true')
-					md-button.md-raised.center-block.dynamicButton.dynamicColor(v-on:click.native='continueGame') Continue
-				
+					md-button.md-raised.center-block.dynamicButton(v-on:click.native='continueGame', :style='{color: body, backgroundColor: back}') Continue
+	br
 </template>
 
 <style lang="stylus">

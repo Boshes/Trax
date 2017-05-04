@@ -16,6 +16,7 @@ var vue = {
 	created: function(){
 	    this.$on('data ready', function(data){
 	        this.$set(this, this.$options.key, data)
+	        this.backgroundReady = false
 	        this.backgroundImage = 'url(' + this.artist.images[0].url + ')'
 	        this.isReady = true
 	    })

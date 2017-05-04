@@ -14,6 +14,7 @@ export default {
 	computed: {
 	},
 	created: function () {
+		
 	},
 	methods: {
 		'selectGenre':function(genre){
@@ -24,25 +25,39 @@ export default {
 	        	eventHub.$emit('start game', this.selectedGenre)
 	        }
 	    }
+	},
+	props:{
+		'back':{
+			required: true
+		},
+		'body':{
+			required: true
+		},
+		'title':{
+			required: true
+		},
+		'ready':{
+			required: true
+		}
 	}
 }
 </script>
 
 <template lang="jade">
 #setup
-	.container-fluid
+	.container-fluid(v-if='ready')
 		.col-sm-12.text-center
-			span.md-display-4.dynamicColor Trax
+			span.md-display-4(:style='{color: title}') Trax
 		br
 		.col-sm-12.text-center.contentWrapper
 			.col-sm-6.contentArea.scrollbar
 				.genreArea
 					.buttonArea(v-for='genre in genres')
-						md-button.md-raised.dynamicButton.genreButton.dynamicColor(v-text='genre', v-on:click.native='selectGenre(genre)')
+						md-button.md-raised.dynamicButton.genreButton(v-text='genre', v-on:click.native='selectGenre(genre)', :style='{color: body, backgroundColor: back}')
 			br
 			.col-sm-6.contentArea(v-if='selectedGenre')
-				span.md-display-3.center-block.dynamicColor(v-text='selectedGenre')
-				md-button.md-raised.col-sm-6.center-block.dynamicButton.dynamicColor(v-on:click.native='play') Lock In
+				span.md-display-3.center-block(v-text='selectedGenre', :style='{color: title}')
+				md-button.md-raised.col-sm-6.center-block.dynamicButton(v-on:click.native='play', :style='{color: body, backgroundColor: back}') Lock In
 		
 </template>
 

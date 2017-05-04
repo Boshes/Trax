@@ -35,6 +35,7 @@ var vue = {
 	      points: 0,
 	      highScore: 0,
 	      wins: 0,
+	      backgroundReady: false,
 	      isReady: false
 	  }  
 	},
@@ -89,6 +90,7 @@ var vue = {
 	    	this.isReady = false
 	    	this.isAnswered = false
 	    	this.points = 0
+	    	this.backgroundReady = false
 	    	eventHub.$emit('reset game')
 	    },
 	    retryGame: function(){
