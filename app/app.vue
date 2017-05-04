@@ -113,11 +113,11 @@ html, body, #app
 	overflow hidden
 	padding-left 0px
 	padding-right 0px
-	&.genreArea
-		flex-direction row
-		flex-wrap wrap
-		height 500px
-		overflow-y scroll
+.genreArea
+	direction ltr
+	display flex
+	flex-direction row
+	flex-wrap wrap
 .buttonArea
 	width 30%
 	margin 1%
@@ -156,6 +156,10 @@ html, body, #app
 .slide-fade-enter, .slide-fade-leave-to
 	transform translateX(10px)
 	opacity 0
+.scrollbar
+	direction rtl
+	height 500px
+	overflow-y scroll
 .scrollbar::-webkit-scrollbar-track
 	-webkit-box-shadow inset 0 0 6px rgba(0,0,0,0.3)
 	background-color #F5F5F5
