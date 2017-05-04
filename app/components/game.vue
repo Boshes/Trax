@@ -117,7 +117,7 @@ export default {
 			transition(name='slide-fade')
 				div(v-if='isReady && ready')
 					.col-sm-12.center-block
-						md-button.md-raised(v-text='availableTracks[0].name', v-on:click.once.native='answerTrack(availableTracks[0])', :style='{color: body, backgroundColor: back}')
+						md-button.md-raised.dynamicButton(v-text='availableTracks[0].name', v-on:click.once.native='answerTrack(availableTracks[0])', :style='{color: body, backgroundColor: back}')
 					.col-sm-12.center-block
 						.col-sm-6
 							md-button.md-raised.dynamicButton(v-text='availableTracks[1].name', v-on:click.once.native='answerTrack(availableTracks[1])', :style='{color: body, backgroundColor: back}')
