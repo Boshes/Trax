@@ -20,6 +20,7 @@
     "bootstrap-sass-loader": "^1.0.10",
     "bootstrap-webpack": "0.0.5",
     "css-loader": "^0.23.1",
+    "emoji-data-css": "^1.0.1",
     "es6-promise": "^3.0.2",
     "exports-loader": "^0.6.3",
     "expose-loader": "0.7.1",

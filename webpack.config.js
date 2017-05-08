@@ -74,7 +74,8 @@ module.exports = {
 		alias: {
 			'vue$': 'vue/dist/vue.js',
 			'background-check': 'background-check/background-check.min.js',
-			'vue-material-css': 'vue-material/dist/vue-material.css'
+			'vue-material-css': 'vue-material/dist/vue-material.css',
+			'emojis': 'emoji-data-css/files/ap-64-emoji.css'
   	}
 	}
 }

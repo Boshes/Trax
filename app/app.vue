@@ -1,5 +1,6 @@
 <script>
 import 'vue-material-css'
+import 'emojis'
 import { eventHub } from './event.js'
 import Vibrant from 'node-vibrant'
 var GameMixin = require('./mixins/game')
@@ -39,7 +40,6 @@ export default {
 		eventHub.$on('reset game', function(){
 			this.resetSettings()
 		}.bind(this))
-		console.log(this)
 	},
 	methods: {
 		'toggleView': function(){
@@ -52,7 +52,6 @@ export default {
 			img.addEventListener('load', function(img) {
 				var vibrant = new Vibrant(img)
 				vibrant.getPalette(function(err, palette){
-					console.log(this, palette)
 					this.bodyColor = palette['LightVibrant']!=null ? palette['LightVibrant'].getHex().toString() : palette['LightMuted'].getHex().toString()
 					this.titleColor = palette['Vibrant'] != null ? palette['Vibrant'].getHex().toString() : palette['Muted'].getHex().toString()
 					this.backColor = palette['DarkMuted'].getHex().toString()
@@ -68,6 +67,8 @@ export default {
 			this.isAnswered = false
 			this.albumsReady = false
 	    	this.gameFinished = false
+	    	this.gameState = false
+	    	this.emoji = null
 			this.$Progress.set(0)
 			this.genre = null
 			this.selectedGenre = null
@@ -163,11 +164,6 @@ html, body, #app
 	word-wrap normal
 	&.genreButton
 		width 200px
-.correct
-	border 1px solid green
-.wrong
-	border 1px solid red
-	align-content stretch
 .md-button
 	text-transform none
 .slide-fade-enter-active
@@ -190,6 +186,30 @@ html, body, #app
 .scrollbar::-webkit-scrollbar-thumb
 	background-color #0ae
 	background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, .2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, .2) 50%,rgba(255, 255, 255, .2) 75%,transparent 75%,transparent)
+.interludeShade
+	overflow auto
+	position fixed
+	left 0
+	top 0
+	right 0
+	bottom 0
+	z-index 999999
+	transition opacity .2s ease
+.successShade
+	background-color rgb(100,218,70)
+.failureShade
+	background-color tomato
+.interludeContainer
+	position fixed
+	top 50%
+	left 50%
+	transform translate(-50%, -50%)
+	transition all .2s ease
+.interlude-enter, .interlude-leave-active
+	opacity 0
+.interlude-enter .interludeContainer, .interlude-leave-active .interludeContainer
+	-webkit-transform scale(1.1)
+	transform scale(1.1)
 [v-cloak]
 	display none!important
 </style>
