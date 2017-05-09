@@ -22,7 +22,7 @@ var vue = {
 	  return{
 	      genres: ['Alternative Rock','Blues','Classical','Country','Dancehall', 'Drum and Bass','Dubstep','EDM','Electro Swing', 'Emo','Folk','Funk','Grunge','Indie Rock','Industrial','Jazz','Metal','Metalcore','New Age','New Wave','Pop','Progressive Metal','Punk','R&B','Rap','Reggae','Rock','Ska','Soul','Trap Music'],
 	      successEmojis: ['clap','grimacing','heart', 'raised_fist','musical_note','notes','ok_hand','raised_hands','slightly_smiling_face','smile','smile_cat','smiley','smiley_cat','smirk_cat','stuck_out_tongue_winking_eye','sunny','upside_down_face','wink'],
-	      failureEmojis: ['angry','anguised','cry','crying_cat_face','disappointed','dizzy_face','frowning','scream','scream_cat','slightly_frowning_face','sob','worried'],
+	      failureEmojis: ['angry','anguished','cry','crying_cat_face','disappointed','dizzy_face','frowning','scream','scream_cat','slightly_frowning_face','sob','worried'],
 	      emoji: null,
 	      selectedGenre: null,
 	      availableTracks: [],
@@ -31,6 +31,7 @@ var vue = {
 	      backgroundImage: 'url(./assets/background.jpg)',
 	      timer: null,
 	      selectedAnswer: null,
+	      correctAnswer: null,
 	      isAnswered: false,
 	      isCorrect: {},
 	      isWrong: {},
@@ -63,7 +64,12 @@ var vue = {
 		    	var popular = Math.max.apply(Math, this.availableTracks.map(function(track){
 		    		return track.popularity
 		    	}))
-		    	console.log(popular)
+		    	for(var i = 0; i<this.availableTracks.length;i++){
+		    		if(this.availableTracks[i].popularity == popular && $('#button'+i).text() == this.availableTracks[i].name){
+		    			this.correctAnswer = i
+		    			break
+		    		}
+		    	}
 		    	if(track.popularity === popular){
 		    		this.$Progress.pause()
 		    		this.points += 1000 * multiplier
@@ -130,7 +136,6 @@ var vue = {
 	    setInterludeWindow: function(gameState){
 	    	if(gameState==true){
 	    		this.emoji = 'ap ap-' + this.successEmojis[Math.floor(Math.random() * this.successEmojis.length)]
-	    		console.log(this.emoji)
 				this.openWindow('success')
 				setTimeout(function(){
 					this.closeWindow()
@@ -138,7 +143,6 @@ var vue = {
 	    	}
 	    	else{
 	    		this.emoji = 'ap ap-' + this.failureEmojis[Math.floor(Math.random() * this.failureEmojis.length)]
-	    		console.log(this.emoji)
     			this.openWindow('failure')
 				setTimeout(function(){
 					this.closeWindow()

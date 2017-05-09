@@ -173,6 +173,13 @@ html, body, #app
 .slide-fade-enter, .slide-fade-leave-to
 	transform translateX(10px)
 	opacity 0
+.spinnerShade
+	position fixed
+	top 50%
+	left 50%
+	transform translate(-50%, -50%)
+	transition all .2s ease
+	z-index 999999
 .scrollbar
 	direction rtl
 	height 500px
@@ -185,7 +192,7 @@ html, body, #app
 	background-color #F5F5F5
 .scrollbar::-webkit-scrollbar-thumb
 	background-color #0ae
-	background-image: -webkit-linear-gradient(45deg,rgba(255, 255, 255, .2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, .2) 50%,rgba(255, 255, 255, .2) 75%,transparent 75%,transparent)
+	background-image -webkit-linear-gradient(45deg,rgba(255, 255, 255, .2) 25%,transparent 25%,transparent 50%,rgba(255, 255, 255, .2) 50%,rgba(255, 255, 255, .2) 75%,transparent 75%,transparent)
 .interludeShade
 	overflow auto
 	position fixed
@@ -196,9 +203,11 @@ html, body, #app
 	z-index 999999
 	transition opacity .2s ease
 .successShade
-	background-color rgb(100,218,70)
+	background -webkit-linear-gradient(left, rgba(100,218,70,0.8) 0%, rgba(100,218,70,0.5) 5%, rgba(100,218,70,0) 15%, rgba(100,218,70,0) 85%, rgba(100,218,70,0.5) 95%, rgba(100,218,70,0.8) 100%)
 .failureShade
-	background-color tomato
+	background -webkit-linear-gradient(left, rgba(255,99,71,0.8) 0%, rgba(255,99,71,0.5) 5%, rgba(255,99,71,0) 49%, rgba(255,99,71,0) 85%, rgba(255,99,71,0.5) 95%, rgba(255,99,71,0.8) 100%)
+.emoji
+	transform scale(2)
 .interludeContainer
 	position fixed
 	top 50%
@@ -208,8 +217,32 @@ html, body, #app
 .interlude-enter, .interlude-leave-active
 	opacity 0
 .interlude-enter .interludeContainer, .interlude-leave-active .interludeContainer
-	-webkit-transform scale(1.1)
-	transform scale(1.1)
+    opacity 1
+    transition fade 2s linear
 [v-cloak]
 	display none!important
+@media only screen and (max-width: 767px), (min-device-width: 320px) and (max-device-width: 767px)
+	.contentWrapper
+		flex-direction column !important
+	.scrollbar
+		width 100% !important
+	.dynamicButton
+		font-size 14px !important
+		&.genreButton
+			width 100% !important
+			line-height normal !important
+/*@media only screen and (orientation:landscape)*/
+/*	.contentWrapper*/
+/*		flex-direction column !important*/
+/*	.scrollbar*/
+/*		width 100% !important*/
+@media only screen and (min-width: 768px), (min-device-width: 768px) and (max-device-width: 1024px)
+	.contentWrapper
+		flex-direction column !important
+	.scrollbar
+		width 100% !important
+		height 700px !important
+@media only screen and (min-width: 1024px)
+	.contentWrapper
+		flex-direction row !important
 </style>

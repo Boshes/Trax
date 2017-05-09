@@ -99,7 +99,7 @@ export default {
 					this.setInterludeWindow(this.gameState)
 					for(var i=0; i<4;i++){
 						if(i==this.selectedAnswer){
-							$('#button'+this.selectedAnswer).css('border-color', 'green')
+							$('#button'+this.selectedAnswer).css('border', '3px solid rgb(100,218,70)')
 						}
 						else{
 							$('#button'+i).fadeOut('fast')
@@ -110,7 +110,10 @@ export default {
 					this.setInterludeWindow(this.gameState)
 					for(var i=0; i<4;i++){
 						if(i==this.selectedAnswer){
-							$('#button'+this.selectedAnswer).css('border-color', 'red')
+							$('#button'+this.selectedAnswer).css('border', '3px solid rgb(255,99,71)')
+						}
+						else if(i==this.correctAnswer){
+							$('#button'+this.correctAnswer).css('border', '3px solid rgb(100,218,70)')
 						}
 						else{
 							$('#button'+i).fadeOut('fast')
@@ -126,7 +129,7 @@ export default {
 <template lang="jade">
 #game
 	.container-fluid
-		md-spinner.center-block(md-indeterminate, style='margin: 0 auto;', v-show='!isReady || !ready', :style='{color: title}')
+		md-spinner.center-block.spinnerShade(md-indeterminate, v-show='!isReady || !ready', :style='{color: title}')
 		br
 		div.text-center
 			transition(name='slide-fade')
@@ -153,25 +156,25 @@ export default {
 			transition(name='slide-fade')
 				div(v-if='isReady && ready')
 					.col-sm-12.center-block
-						md-button.md-raised.dynamicButton(id='button0', v-text='availableTracks[0].name', v-on:click.once.native='answerTrack(availableTracks[0], 0)', :style='{color: body, backgroundColor: back}')
+						md-button.md-raised.dynamicButton#button0(v-text='availableTracks[0].name', v-on:click.once.native='answerTrack(availableTracks[0], 0)', :style='{color: body, backgroundColor: back}')
 					.col-sm-12.center-block
 						.col-sm-6
-							md-button.md-raised.dynamicButton(id='button1', v-text='availableTracks[1].name', v-on:click.once.native='answerTrack(availableTracks[1], 1)', :style='{color: body, backgroundColor: back}')
+							md-button.md-raised.dynamicButton#button1(v-text='availableTracks[1].name', v-on:click.once.native='answerTrack(availableTracks[1], 1)', :style='{color: body, backgroundColor: back}')
 						.col-sm-6
-							md-button.md-raised.dynamicButton(id='button2', v-text='availableTracks[2].name', v-on:click.once.native='answerTrack(availableTracks[2], 2)', :style='{color: body, backgroundColor: back}')
+							md-button.md-raised.dynamicButton#button2(v-text='availableTracks[2].name', v-on:click.once.native='answerTrack(availableTracks[2], 2)', :style='{color: body, backgroundColor: back}')
 					.col-sm-12.center-block
-						md-button.md-raised.dynamicButton(id='button3', v-text='availableTracks[3].name', v-on:click.once.native='answerTrack(availableTracks[3], 3)', :style='{color: body, backgroundColor: back}')
+						md-button.md-raised.dynamicButton#button3(v-text='availableTracks[3].name', v-on:click.once.native='answerTrack(availableTracks[3], 3)', :style='{color: body, backgroundColor: back}')
 			br
 			.col-sm-12.text-center(v-if='isReady && gameFinished && ready')
 				div(v-if='gameState==false')
 					.col-sm-6
-						md-button.md-raised.center-block.dynamicButton(id='backButton', v-on:click.native='resetGame', :style='{color: body, backgroundColor: back}') Genre Selection
+						md-button.md-raised.center-block.dynamicButton#backButton(v-on:click.native='resetGame', :style='{color: body, backgroundColor: back}') Genre Selection
 					.col-sm-6
-						md-button.md-raised.center-block.dynamicButton(id='retryButton', v-on:click.native='retryGame', :style='{color: body, backgroundColor: back}') Retry with same genre
+						md-button.md-raised.center-block.dynamicButton#retryButton(v-on:click.native='retryGame', :style='{color: body, backgroundColor: back}') Retry with same genre
 				div(v-if='gameState==true')
-					md-button.md-raised.center-block.dynamicButton(id='continueButton', v-on:click.native='continueGame', :style='{color: body, backgroundColor: back}') Continue
+					md-button.md-raised.center-block.dynamicButton#continueButton(v-on:click.native='continueGame', :style='{color: body, backgroundColor: back}') Continue
 			component(:show='showInterludeWindow', :condition='condition', is='interlude')
-				div(:class='emoji')
+				.emoji(:class='emoji')
 	br
 </template>
 

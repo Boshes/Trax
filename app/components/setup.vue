@@ -57,6 +57,7 @@ export default {
 			br
 			.col-sm-6.contentArea(v-if='selectedGenre')
 				span.md-display-3.center-block(v-text='selectedGenre', :style='{color: title}')
+				br
 				md-button.md-raised.col-sm-6.center-block.dynamicButton(v-on:click.native='play', :style='{color: body, backgroundColor: back}') Lock In
 		
 </template>
