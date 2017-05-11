@@ -69,7 +69,6 @@ var vue = {
 		    			this.highScore = this.points
 		    			localStorage.setItem('trax highscore', this.highScore)
 		    		}
-		    		console.log("points", this.points, "highscore", this.highScore)
 		    		return this.winRound()
 		    	}
 		    	else{

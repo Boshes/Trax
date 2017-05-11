@@ -174,12 +174,12 @@ export default {
 						md-button.md-raised.dynamicButton.answerButton#button0(v-on:click.once.native='answerTrack(availableTracks[0], 0)', :style='{color: body, backgroundColor: back}')
 							img.image(:src='availableTracks[0].album.images[2].url')
 							span(v-text='availableTracks[0].name')
-					.col-sm-12.col-xs-12.center-block.no-padding
-						.col-sm-6.col-xs-12.center-block.no-padding
+					.col-sm-12.center-block.no-padding
+						.col-sm-6.center-block.no-padding
 							md-button.md-raised.dynamicButton.answerButton#button1(v-on:click.once.native='answerTrack(availableTracks[1], 1)', :style='{color: body, backgroundColor: back}')
 								img.image(:src='availableTracks[1].album.images[2].url')
 								span(v-text='availableTracks[1].name')
-						.col-sm-6.col-xs-12.center-block.no-padding
+						.col-sm-6.center-block.no-padding
 							md-button.md-raised.dynamicButton.answerButton#button2(v-on:click.once.native='answerTrack(availableTracks[2], 2)', :style='{color: body, backgroundColor: back}')
 								img.image(:src='availableTracks[2].album.images[2].url')
 								span(v-text='availableTracks[2].name')
