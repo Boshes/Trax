@@ -190,14 +190,14 @@ export default {
 			br
 			.col-sm-12.text-center.progressArea.no-padding(v-if='isReady && gameFinished && ready')
 				div(v-if='gameState==false')
-					.col-sm-6.col-xs-12.center-block.no-padding
+					.col-sm-6.center-block.no-padding
 						md-button.md-raised.dynamicButton#backButton(v-on:click.native='resetGame', :style='{color: body, backgroundColor: back}') Genre Selection
 							i.material-icons.pull-left.iconButton(:style='{color: body}') sort
-					.col-sm-6.col-xs-12.center-block.no-padding
+					.col-sm-6.center-block.no-padding
 						md-button.md-raised.dynamicButton#retryButton(v-on:click.native='retryGame', :style='{color: body, backgroundColor: back}') Retry with same genre
 							i.material-icons.pull-right.iconButton(:style='{color: body}') replay
 				div(v-if='gameState==true')
-					.col-sm-12.col-xs-12.center-block.no-padding
+					.col-sm-12.center-block.no-padding
 						md-button.md-raised.dynamicButton#continueButton(v-on:click.native='continueGame', :style='{color: body, backgroundColor: back}') Continue
 							i.material-icons.pull-right.iconButton(:style='{color: body}') forward
 			component(:show='showInterludeWindow', :condition='condition', is='interlude')
