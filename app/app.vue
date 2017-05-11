@@ -87,17 +87,17 @@ export default {
 	vue-progress-bar
 	#vue-wrapper.dynamicBackground(:style='{"background-image": backgroundImage }')
 		.container-fluid(v-if='backgroundReady==true')
-			i.material-icons.backButton(v-if='currentView=="game"', v-on:click='resetSettings', :style='{"color": titleColor}') keyboard_backspace
+			i.material-icons.backButton(v-if='currentView=="game"', v-on:click='resetSettings', :style='{color: titleColor}') keyboard_backspace
 			transition(name='slide-fade')
 				component(:is='currentView', :genre='genre', :body='bodyColor', :title='titleColor', :back='backColor', :ready='backgroundReady')
 			br
 	#vue-footer
-		.container-fluid
-			.row.col-sm-12.text-center
-				h5 Trax
-				p.small.muted Spotify Game
-				p
-					a(href='https://www.github.com/boshes/trax') More Info
+		.container-fluid.no-padding
+			.col-sm-12.text-center.no-padding
+				h3 Trax
+				h4.small Popular Song Guessing Game with Spotify
+				h4
+					a(href='https://www.github.com/boshes/trax') Find me on GitHub
 						
 </template>
 
@@ -164,6 +164,9 @@ html, body, #app
 	word-wrap normal
 	&.genreButton
 		width 200px
+	&.answerButton > span, &.answerButton > img
+		vertical-align middle
+		line-height 4
 .md-button
 	text-transform none
 .slide-fade-enter-active
@@ -208,6 +211,14 @@ html, body, #app
 	background -webkit-linear-gradient(left, rgba(255,99,71,0.8) 0%, rgba(255,99,71,0.5) 5%, rgba(255,99,71,0) 49%, rgba(255,99,71,0) 85%, rgba(255,99,71,0.5) 95%, rgba(255,99,71,0.8) 100%)
 .emoji
 	transform scale(2)
+.iconButton
+	margin-top 5px
+	transform scale(1.4)
+.image
+	padding-left 1em
+	float left
+.progressArea
+	padding-top 10%
 .interludeContainer
 	position fixed
 	top 50%
@@ -231,6 +242,19 @@ html, body, #app
 		&.genreButton
 			width 100% !important
 			line-height normal !important
+		&.answerButton
+			width 100% !important
+		&#continueButton
+			width 100% !important
+		&#backButton
+			width 100% !important
+		&#retryButton
+			width 100% !important
+	.no-padding
+		padding-left 0px !important
+		padding-right 0px !important
+	.progressArea
+		padding-top 10% !important
 /*@media only screen and (orientation:landscape)*/
 /*	.contentWrapper*/
 /*		flex-direction column !important*/

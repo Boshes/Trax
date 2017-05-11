@@ -15,7 +15,6 @@ module.exports = {
 	},
 	module: {
 		loaders: [
-			// vue
 			{
 				test: /\.vue$/,
 				loader: 'vue-loader'
@@ -52,17 +51,17 @@ module.exports = {
 		]
 	},
 	plugins: [
-		// new webpack.DefinePlugin({
-    //   'process.env': {
-    //     NODE_ENV: JSON.stringify('production')
-    //   }
-    // }),
-		// new webpack.optimize.UglifyJsPlugin({
-		// 		compressor: {
-		// 				warnings: false
-		// 		},
-		// 		mangle: true
-		// }),
+		new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production')
+      }
+    }),
+		new webpack.optimize.UglifyJsPlugin({
+				compressor: {
+						warnings: false
+				},
+				mangle: true
+		}),
 		new webpack.ProvidePlugin({
 			$: "jquery",
 			jQuery: "jquery",
@@ -73,7 +72,6 @@ module.exports = {
 	resolve:{
 		alias: {
 			'vue$': 'vue/dist/vue.js',
-			'background-check': 'background-check/background-check.min.js',
 			'vue-material-css': 'vue-material/dist/vue-material.css',
 			'emojis': 'emoji-data-css/files/ap-64-emoji.css'
   	}

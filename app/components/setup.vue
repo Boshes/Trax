@@ -49,7 +49,10 @@ export default {
 		.col-sm-12.text-center
 			span.md-display-4(:style='{color: title}') Trax
 		br
-		.col-sm-12.text-center.contentWrapper
+		.col-sm-12.text-center
+			span.md-display-2(:style='{color: title}') Guess popular songs by each artist before time runs out!
+		br
+		.col-sm-12.text-center.contentWrapper.no-padding
 			.col-sm-6.contentArea.scrollbar
 				.genreArea
 					.buttonArea(v-for='genre in genres')
@@ -59,6 +62,7 @@ export default {
 				span.md-display-3.center-block(v-text='selectedGenre', :style='{color: title}')
 				br
 				md-button.md-raised.col-sm-6.center-block.dynamicButton(v-on:click.native='play', :style='{color: body, backgroundColor: back}') Lock In
+					i.material-icons.pull-right.iconButton(:style='{color: body}') play_arrow
 		
 </template>
 

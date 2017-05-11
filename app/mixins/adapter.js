@@ -32,7 +32,6 @@ vue.methods.searchArtistAlbums = function(genre){
         spotifyApi.searchArtists('genre:"' + genre + '"', {limit:1, offset: Math.floor((Math.random() * 49) + 0), market: 'US'})
             .then(function(data){
                 this.artist = data.body.artists.items[0]
-                console.log("artist", this.artist)
                 return spotifyApi.getArtistAlbums(this.artist.id)
             }.bind(this))
             .then(function(data){
@@ -59,7 +58,7 @@ vue.methods.searchAlbumTracks = function(album){
                 return data.body.tracks.items.map(function(t){ return t.id})
             })
             .then(function(tracks){
-                return spotifyApi.getTracks(tracks)
+                return spotifyApi.getTracks(tracks, {market: 'US'})
             })
             .then(function(data){
                 resolve(data.body.tracks)
@@ -73,7 +72,6 @@ vue.methods.searchAlbumTracks = function(album){
 
 //Get Tracks from all the Albums
 vue.methods.searchAllTracks = function(albums){
-    console.log("albums", albums)
     var albumPromises = albums.map(this.searchAlbumTracks)
     Promise.all(albumPromises)
         .then(function(data){
@@ -85,14 +83,12 @@ vue.methods.searchAllTracks = function(albums){
 }
 
 //Return Distinct Albums
-//might need more logic
 vue.methods.filterAlbums = function(albums){
     var filteredAlbums = albums.filter((album, index, self) =>
         self.findIndex((a) => {
             return album.name.includes(a.name) && album.name.length === a.name.length
         }) === index
     )
-    console.log("original albums", albums, "filtered albums", filteredAlbums)
     return filteredAlbums
 }
 

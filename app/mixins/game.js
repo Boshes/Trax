@@ -21,8 +21,8 @@ var vue = {
 	data: function(){
 	  return{
 	      genres: ['Alternative Rock','Blues','Classical','Country','Dancehall', 'Drum and Bass','Dubstep','EDM','Electro Swing', 'Emo','Folk','Funk','Grunge','Indie Rock','Industrial','Jazz','Metal','Metalcore','New Age','New Wave','Pop','Progressive Metal','Punk','R&B','Rap','Reggae','Rock','Ska','Soul','Trap Music'],
-	      successEmojis: ['clap','grimacing','heart', 'raised_fist','musical_note','notes','ok_hand','raised_hands','slightly_smiling_face','smile','smile_cat','smiley','smiley_cat','smirk_cat','stuck_out_tongue_winking_eye','sunny','upside_down_face','wink'],
-	      failureEmojis: ['angry','anguished','cry','crying_cat_face','disappointed','dizzy_face','frowning','scream','scream_cat','slightly_frowning_face','sob','worried'],
+	      successEmojis: ['+1','100','balloon','blush','clap','confetti_ball','dancer','four_leaf_clover','grimacing','grin','grinning','headphones','heart','joy','joy_cat','laughing','microphone','musical_note','notes','ok_hand','raised_fist','raised_hands','relaxed','relieved','slightly_smiling_face','smile','smile_cat','smiley','smiley_cat','smirk','smirk_cat','sparkles','stuck_out_tongue_winking_eye','sunglasses','sunny','sweat_smile','tada','upside_down_face','v','white_check_mark','wink','yum'],
+	      failureEmojis: ['-1','angry','anguished','astonished','cold_sweat','confounded','confused','cry','crying_cat_face','disappointed','disappointed_relieved','dizzy_face','expressionless','fearful','frowning','neutral_face','pensive','persevere','scream','scream_cat','slightly_frowning_face','sob','sweat','unamused','weary','white_frowning_face','worried','x'],
 	      emoji: null,
 	      selectedGenre: null,
 	      availableTracks: [],
@@ -61,15 +61,7 @@ var vue = {
 	    		this.selectedAnswer = id
 	    		this.clearBar(this.timer)
 	    		var multiplier = this.$Progress.get()
-		    	var popular = Math.max.apply(Math, this.availableTracks.map(function(track){
-		    		return track.popularity
-		    	}))
-		    	for(var i = 0; i<this.availableTracks.length;i++){
-		    		if(this.availableTracks[i].popularity == popular && $('#button'+i).text() == this.availableTracks[i].name){
-		    			this.correctAnswer = i
-		    			break
-		    		}
-		    	}
+	    		var popular = this.getPopularTrack()
 		    	if(track.popularity === popular){
 		    		this.$Progress.pause()
 		    		this.points += 1000 * multiplier
@@ -87,14 +79,24 @@ var vue = {
 		    	}
 	    	}
 	    },
+	    getPopularTrack:function(){
+	    	var popular = Math.max.apply(Math, this.availableTracks.map(function(track){
+	    		return track.popularity
+		    }))
+	    	for(var i = 0; i<this.availableTracks.length;i++){
+	    		if(this.availableTracks[i].popularity == popular && $('#button'+i + ' span').text() == this.availableTracks[i].name){
+	    			this.correctAnswer = i
+	    			break
+	    		}
+	    	}
+	    	return popular
+	    },
 	    winRound: function(){
-	    	console.log("win")
 	    	this.gameState = true
 	    	this.gameFinished = true
 	    	this.wins += 1
 	    },
 	    loseRound: function(){
-	    	console.log("lose")
 	    	this.gameState = false
 	    	this.gameFinished = true
 	    },
@@ -103,6 +105,7 @@ var vue = {
 	    	this.isAnswered = false
 	    	this.emoji = null
 	    	this.points = 0
+	    	this.wins = 0
 	    	this.backgroundReady = false
 	    	eventHub.$emit('reset game')
 	    },
@@ -116,6 +119,7 @@ var vue = {
 	    	this.artist = {}
 	    	this.albums = []
 	    	this.points = 0
+	    	this.wins = 0
 	    	this.getArtistAlbums(this.genre)
 	    },
 	    continueGame: function(){
@@ -148,6 +152,10 @@ var vue = {
 					this.closeWindow()
 				}.bind(this), 2000)
 	    	}
+	    },
+	    moreArtist: function(){
+	    	var win = window.open('https://www.google.com/search?q=' + this.artist.name, '_blank')
+	    	win.focus()
 	    }
 	}
 }
