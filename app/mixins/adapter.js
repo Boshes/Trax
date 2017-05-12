@@ -93,7 +93,6 @@ vue.methods.filterAlbums = function(albums){
 }
 
 //Return Distinct Tracks
-//might make it remove live tracks and other forms of "live" wording
 vue.methods.filterTracks = function(tracks){
     var originalTracks = [].concat.apply([], tracks)
     var filteredTracks = originalTracks.filter((track, index, self) => 
@@ -103,11 +102,20 @@ vue.methods.filterTracks = function(tracks){
     )
     var i = 0
     var availableTracks = []
+    var trackNames = []
+    var numbers = []
     while(i <4){
-        availableTracks.push(filteredTracks[Math.floor((Math.random() * filteredTracks.length), 0)])
-        i++
+        var number = Math.floor((Math.random() * filteredTracks.length), 0)
+        if(numbers.indexOf(number) === -1){
+            numbers.push(number)
+            if(trackNames.indexOf(filteredTracks[number].name) === -1){
+                trackNames.push(filteredTracks[number].name)
+                availableTracks.push(filteredTracks[number])
+                i++
+            }
+        }
     }
-    console.log("original", originalTracks, "filteredTracks", filteredTracks, "avaibleTracks", availableTracks)
+    console.log("Available", availableTracks)
     this.$emit('data ready', availableTracks)
 }
 

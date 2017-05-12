@@ -14,7 +14,6 @@ export default {
 	computed: {
 	},
 	created: function () {
-		
 	},
 	methods: {
 		'selectGenre':function(genre){
@@ -50,7 +49,7 @@ export default {
 			span.md-display-4(:style='{color: title}') Trax
 		br
 		.col-sm-12.text-center
-			span.md-display-2(:style='{color: title}') Guess popular songs by each artist before time runs out!
+			span.md-display-2(:style='{color: title}') Guess most popular song by each artist before time runs out!
 		br
 		.col-sm-12.text-center.contentWrapper.no-padding
 			.col-sm-6.contentArea.scrollbar

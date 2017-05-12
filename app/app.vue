@@ -40,6 +40,9 @@ export default {
 		eventHub.$on('reset game', function(){
 			this.resetSettings()
 		}.bind(this))
+		eventHub.$on('reset sound', function(sound){
+			this.trackSound = sound
+		}.bind(this))
 	},
 	methods: {
 		'toggleView': function(){
@@ -60,6 +63,9 @@ export default {
 			}.bind(this, img))
 		},
 		'resetSettings': function(){
+			if(this.trackSound!=null){
+				this.resetSound()
+			}
 			this.toggleView()
 			if(this.timer!=null){
 				this.clearBar()
@@ -95,7 +101,7 @@ export default {
 		.container-fluid.no-padding
 			.col-sm-12.text-center.no-padding
 				h3 Trax
-				h4.small Popular Song Guessing Game with Spotify
+				h4.small Popular Song Guessing Game using Spotify
 				h4
 					a(href='https://www.github.com/boshes/trax') Find me on GitHub
 						
@@ -111,9 +117,11 @@ html, body, #app
 	flex-direction column
 #vue-wrapper
 	flex 1 0 auto
+	background-attachment fixed
 	background-repeat no-repeat
-	background-position center
+	background-position center center
 	background-size cover
+	-webkit-background-size cover
 	color white
 #vue-footer
 	background-color #333
@@ -174,7 +182,7 @@ html, body, #app
 .slide-fade-leave-active
 	transition all .2s cubic-bezier(1.0,0.5,0.8,1.0)
 .slide-fade-enter, .slide-fade-leave-to
-	transform translateX(10px)
+	transform translateX(20px)
 	opacity 0
 .spinnerShade
 	position fixed
@@ -218,7 +226,7 @@ html, body, #app
 	padding-left 1em
 	float left
 .progressArea
-	padding-top 10%
+	padding-top 8%
 .interludeContainer
 	position fixed
 	top 50%
@@ -233,6 +241,8 @@ html, body, #app
 [v-cloak]
 	display none!important
 @media only screen and (max-width: 767px), (min-device-width: 320px) and (max-device-width: 767px)
+	#vue-wrapper
+		background-attachment fixed !important
 	.contentWrapper
 		flex-direction column !important
 	.scrollbar
@@ -254,12 +264,7 @@ html, body, #app
 		padding-left 0px !important
 		padding-right 0px !important
 	.progressArea
-		padding-top 10% !important
-/*@media only screen and (orientation:landscape)*/
-/*	.contentWrapper*/
-/*		flex-direction column !important*/
-/*	.scrollbar*/
-/*		width 100% !important*/
+		padding-top 5% !important
 @media only screen and (min-width: 768px), (min-device-width: 768px) and (max-device-width: 1024px)
 	.contentWrapper
 		flex-direction column !important
