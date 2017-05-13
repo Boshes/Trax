@@ -77,7 +77,7 @@ export default {
 						$('#volume'+i).css('color', 'rgb(237,237,237)')
 					}
 					else{
-						$('#volume'+id).css('color', this.body)
+						$('#volume'+i).css('color', this.body)
 					}
 				}
 				this.detectKeys()
