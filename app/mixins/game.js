@@ -138,7 +138,7 @@ var vue = {
 	    	return popular
 	    },
 	    winRound: function(){
-	    	if(this.selectedSound != this.selectedAnswer){
+	    	if(this.trackSound!=null && this.selectedSound != this.selectedAnswer){
 	    		this.resetSound()
 	    	}
 	    	this.gameState = true
