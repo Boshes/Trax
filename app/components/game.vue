@@ -72,6 +72,14 @@ export default {
 				if(this.trackSound!=null){
 					this.resetSound()
 				}
+				for(var i=0;i<4;i++){
+					if(this.availableTracks[i].is_playable==false){
+						$('#volume'+i).css('color', 'rgb(237,237,237)')
+					}
+					else{
+						$('#volume'+id).css('color', this.body)
+					}
+				}
 				this.detectKeys()
 				this.$Progress.tempColor('rgb(50,205,50)')
 				this.$Progress.set(100)
@@ -157,11 +165,8 @@ export default {
 						md-icon(md-icon-morph) more_vert
 						md-icon more_horiz
 					md-button.md-fab-md-primary.md-mini-md-clean
-						md-icon info
-							md-tooltip(md-direction="bottom") Guess the Most Popular Song
-					md-button.md-fab-md-primary.md-mini-md-clean
 						md-icon videogame_asset
-							md-tooltip(md-direction="bottom") Hold down on song to listen and you can use arrow keys to choose
+							md-tooltip(md-direction="bottom") Guess the Most Popular Song, You can use arrows keys to choose too!
 					md-button.md-fab-md-primary.md-mini-md-clean
 						md-icon(v-on:click.native='moreArtist') search
 							md-tooltip(md-direction="bottom") Search Artist
@@ -181,29 +186,29 @@ export default {
 			transition(name='slide-fade')
 				div(v-if='isReady && ready', style='padding-top:20px;')
 					.col-sm-12.center-block.no-padding
-						md-button.md-raised.dynamicButton.answerButton#button0(v-on:click.once.native.self='answerTrack(availableTracks[0], 0)', :style='{color: body, backgroundColor: back}')
-							img.image(:src='availableTracks[0].album.images[2].url')
-							span(v-text='availableTracks[0].name')
-							md-icon.iconButton#volume0(v-on:click.native='playTrack(0)', :style='{color:body}') music_note
+						md-button.md-raised.dynamicButton.answerButton#button0(v-on:click.once.native.self='answerTrack(0)', :style='{color: body, backgroundColor: back}')
+							img.image(:src='availableTracks[0].album.images[2].url', v-on:click.once='answerTrack(0)')
+							span(v-text='availableTracks[0].name', v-on:click.once='answerTrack(0)')
+							md-icon.iconButton#volume0(v-on:click.native='playTrack(0)') music_note
 								md-tooltip(v-if='availableTracks[0].is_playable==false', md-direction='top') Unavailable
 					.col-sm-12.center-block.no-padding
 						.col-sm-6.center-block.no-padding
-							md-button.md-raised.dynamicButton.answerButton#button1(v-on:click.once.native.self='answerTrack(availableTracks[1], 1)', :style='{color: body, backgroundColor: back}')
-								img.image(:src='availableTracks[1].album.images[2].url')
-								span(v-text='availableTracks[1].name')
-								md-icon.iconButton#volume1(v-on:click.native='playTrack(1)', :style='{color:body}') music_note
+							md-button.md-raised.dynamicButton.answerButton#button1(v-on:click.once.native.self='answerTrack(1)', :style='{color: body, backgroundColor: back}')
+								img.image(:src='availableTracks[1].album.images[2].url', v-on:click.once='answerTrack(1)')
+								span(v-text='availableTracks[1].name', v-on:click.once='answerTrack(1)')
+								md-icon.iconButton#volume1(v-on:click.native='playTrack(1)') music_note
 									md-tooltip(v-if='availableTracks[1].is_playable==false', md-direction='top') Unavailable
 						.col-sm-6.center-block.no-padding
-							md-button.md-raised.dynamicButton.answerButton#button2(v-on:click.once.native.self='answerTrack(availableTracks[2], 2)', :style='{color: body, backgroundColor: back}')
-								img.image(:src='availableTracks[2].album.images[2].url')
-								span(v-text='availableTracks[2].name')
-								md-icon.iconButton#volume2(v-on:click.native='playTrack(2)', :style='{color:body}') music_note
+							md-button.md-raised.dynamicButton.answerButton#button2(v-on:click.once.native.self='answerTrack(2)', :style='{color: body, backgroundColor: back}')
+								img.image(:src='availableTracks[2].album.images[2].url', v-on:click.once='answerTrack(2)')
+								span(v-text='availableTracks[2].name', v-on:click.once='answerTrack(2)')
+								md-icon.iconButton#volume2(v-on:click.native='playTrack(2)') music_note
 									md-tooltip(v-if='availableTracks[2].is_playable==false', md-direction='top') Unavailable
 					.col-sm-12.center-block.no-padding
-						md-button.md-raised.dynamicButton.answerButton#button3(v-on:click.once.native.self='answerTrack(availableTracks[3], 3)', :style='{color: body, backgroundColor: back}')
-							img.image(:src='availableTracks[3].album.images[2].url')
-							span(v-text='availableTracks[3].name')
-							md-icon.iconButton#volume3(v-on:click.native='playTrack(3)', :style='{color:body}') music_note
+						md-button.md-raised.dynamicButton.answerButton#button3(v-on:click.once.native.self='answerTrack(3)', :style='{color: body, backgroundColor: back}')
+							img.image(:src='availableTracks[3].album.images[2].url', v-on:click.once='answerTrack(3)')
+							span(v-text='availableTracks[3].name', v-on:click.once='answerTrack(3)')
+							md-icon.iconButton#volume3(v-on:click.native='playTrack(3)') music_note
 								md-tooltip(v-if='availableTracks[3].is_playable==false', md-direction='top') Unavailable
 			br
 			.col-sm-12.text-center.progressArea.no-padding(v-if='isReady && gameFinished && ready')

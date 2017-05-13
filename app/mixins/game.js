@@ -58,14 +58,14 @@ var vue = {
 	    getAlbumTracks: function(albums){
 	    	this.searchAllTracks(albums)
 	    },
-	    answerTrack: function(track, id){
+	    answerTrack: function(id){
 	    	if(this.isAnswered==false){
 	    		this.isAnswered = true
 	    		this.selectedAnswer = id
 	    		this.clearBar(this.timer)
 	    		var multiplier = this.$Progress.get()
 	    		var popular = this.getPopularTrack()
-		    	if(track.popularity === popular){
+		    	if(this.availableTracks[id].popularity === popular){
 		    		this.$Progress.pause()
 		    		this.points += 1000 * multiplier
 		    		if(this.points > this.highScore){
@@ -138,6 +138,9 @@ var vue = {
 	    	return popular
 	    },
 	    winRound: function(){
+	    	if(this.selectedSound != this.selectedAnswer){
+	    		this.resetSound()
+	    	}
 	    	this.gameState = true
 	    	this.gameFinished = true
 	    	this.wins += 1
@@ -218,16 +221,16 @@ var vue = {
 	    		}
 	    		if(this.gameFinished == false){
 		    		if(e.which === 38){
-		    			this.answerTrack(this.availableTracks[0],0)
+		    			this.answerTrack(0)
 		    		}
 		    		else if(e.which === 37){
-		    			this.answerTrack(this.availableTracks[1],1)
+		    			this.answerTrack(1)
 		    		}
 		    		else if(e.which === 39){
-		    			this.answerTrack(this.availableTracks[2],2)
+		    			this.answerTrack(2)
 		    		}
 		    		else if(e.which === 40){
-		    			this.answerTrack(this.availableTracks[3],3)
+		    			this.answerTrack(3)
 		    		}
 	    		}
 	    		else{

@@ -243,6 +243,8 @@ html, body, #app
 @media only screen and (max-width: 767px), (min-device-width: 320px) and (max-device-width: 767px)
 	#vue-wrapper
 		background-attachment fixed !important
+		backgrond-size 100% !important
+		-webkit-background-size 100% !important
 	.contentWrapper
 		flex-direction column !important
 	.scrollbar
