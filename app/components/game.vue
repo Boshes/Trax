@@ -164,12 +164,12 @@ export default {
 					md-button.md-fab(md-fab-trigger)
 						md-icon(md-icon-morph) more_vert
 						md-icon more_horiz
-					md-button.md-fab-md-primary.md-mini-md-clean
+					md-button.md-fab.md-primary.md-mini.md-clean
 						md-icon videogame_asset
-							md-tooltip(md-direction="bottom") Click or use arrow keys to choose!
-					md-button.md-fab-md-primary.md-mini-md-clean
+						md-tooltip(md-direction="bottom") Click or use arrow keys to choose!
+					md-button.md-fab.md-primary.md-mini.md-clean
 						md-icon(v-on:click.native='moreArtist') search
-							md-tooltip(md-direction="bottom") Look Up Artist
+						md-tooltip(md-direction="bottom") Look Up Artist
 			br
 			br
 			.col-sm-12.no-padding
