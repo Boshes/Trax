@@ -90,8 +90,9 @@ export default {
 
 <template lang="jade">
 #vue-app
+	.dynamicBackground(:style='{"background-image": backgroundImage }')
 	vue-progress-bar
-	#vue-wrapper.dynamicBackground(:style='{"background-image": backgroundImage }')
+	#vue-wrapper
 		.container-fluid(v-if='backgroundReady==true')
 			i.material-icons.backButton(v-if='currentView=="game"', v-on:click='resetSettings', :style='{color: titleColor}') keyboard_backspace
 			transition(name='slide-fade')
@@ -117,17 +118,22 @@ html, body, #app
 	flex-direction column
 #vue-wrapper
 	flex 1 0 auto
+#vue-footer
+	background-color #333
+	flex-shrink 0
+	color #eee
+	padding 5px
+.dynamicBackground
 	background-attachment fixed
 	background-repeat no-repeat
 	background-position center center
 	background-size cover
 	-webkit-background-size cover
 	color white
-#vue-footer
-	background-color #333
-	flex-shrink 0
-	color #eee
-	padding 5px
+	position fixed
+	height 100%
+	width 100%
+	z-index -1
 .contentWrapper
 	display flex
 	flex-direction row
