@@ -166,10 +166,10 @@ export default {
 						md-icon more_horiz
 					md-button.md-fab-md-primary.md-mini-md-clean
 						md-icon videogame_asset
-							md-tooltip(md-direction="bottom") Guess the Most Popular Song, You can use arrows keys to choose too!
+							md-tooltip(md-direction="bottom") Click or use arrow keys to choose!
 					md-button.md-fab-md-primary.md-mini-md-clean
 						md-icon(v-on:click.native='moreArtist') search
-							md-tooltip(md-direction="bottom") Search Artist
+							md-tooltip(md-direction="bottom") Look Up Artist
 			br
 			br
 			.col-sm-12.no-padding
