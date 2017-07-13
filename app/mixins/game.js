@@ -21,8 +21,8 @@ var vue = {
 	data: function(){
 	  return{
 	      genres: ['Alternative Rock','Blues','Classical','Country','Dancehall', 'Drum and Bass','Dubstep','EDM','Electro Swing', 'Emo','Folk','Funk','Grunge','Indie Rock','Industrial','Jazz','Metal','Metalcore','New Age','New Wave','Pop','Progressive Metal','Punk','R&B','Rap','Reggae','Rock','Ska','Soul','Trap Music'],
-	      successEmojis: ['+1','100','balloon','blush','clap','confetti_ball','dancer','four_leaf_clover','grimacing','grin','grinning','headphones','heart','joy','joy_cat','laughing','microphone','musical_note','notes','ok_hand','raised_hands','relaxed','relieved','slightly_smiling_face','smile','smile_cat','smiley','smiley_cat','smirk','smirk_cat','sparkles','stuck_out_tongue_winking_eye','sunglasses','sunny','sweat_smile','tada','upside_down_face','v','white_check_mark','wink','yum'],
-	      failureEmojis: ['-1','angry','anguished','astonished','cold_sweat','confounded','confused','cry','crying_cat_face','disappointed','disappointed_relieved','dizzy_face','expressionless','fearful','frowning','neutral_face','pensive','persevere','scream','scream_cat','slightly_frowning_face','sob','sweat','unamused','weary','white_frowning_face','worried','x'],
+	      successEmojis: ['100','balloon','blush','clap','confetti_ball','dancer','four_leaf_clover','grimacing','grin','grinning','headphones','heart','joy','joy_cat','laughing','microphone','musical_note','notes','ok_hand','raised_hands','relaxed','relieved','slightly_smiling_face','smile','smile_cat','smiley','smiley_cat','smirk','smirk_cat','sparkles','stuck_out_tongue_winking_eye','sunglasses','sunny','sweat_smile','tada','upside_down_face','v','white_check_mark','wink','yum'],
+	      failureEmojis: ['angry','anguished','astonished','cold_sweat','confounded','confused','cry','crying_cat_face','disappointed','disappointed_relieved','dizzy_face','expressionless','fearful','frowning','neutral_face','pensive','persevere','scream','scream_cat','slightly_frowning_face','sob','sweat','unamused','weary','white_frowning_face','worried','x'],
 	      emoji: null,
 	      selectedGenre: null,
 	      availableTracks: [],
@@ -46,12 +46,16 @@ var vue = {
 	      selectedSound: null,
 	      trackSound: null,
 	      isSound: false,
+	      isTokenReady: false,
 	      isReady: false
 	  }  
 	},
 	key: 'availableTracks',
 	mixins: [AdapterMixin],
 	methods: {
+		getAccessToken: function(){
+			this.getClientFlowToken()
+		},
 	    getArtistAlbums: function(genre){
 	        this.searchArtistAlbums(genre)
 	    },

@@ -24,6 +24,7 @@ export default {
 	computed: {
 	},
 	created: function () {
+		this.getAccessToken()
 		this.currentView = 'setup'
 		this.dynamicColorChanger(this.backgroundImage)
 		eventHub.$on('start game', function(genre){
@@ -96,9 +97,9 @@ export default {
 		.container-fluid(v-if='backgroundReady==true')
 			i.material-icons.backButton(v-if='currentView=="game"', v-on:click='resetSettings', :style='{color: titleColor}') keyboard_backspace
 			transition(name='slide-fade')
-				component(:is='currentView', :genre='genre', :body='bodyColor', :title='titleColor', :back='backColor', :ready='backgroundReady')
+				component(:is='currentView', :genre='genre', :body='bodyColor', :title='titleColor', :back='backColor', :ready='backgroundReady', :token='isTokenReady')
 			br
-	#vue-footer
+	#vue-footer(v-if='currentView=="setup"')
 		.container-fluid.no-padding
 			.col-sm-12.text-center.no-padding
 				h3 Trax

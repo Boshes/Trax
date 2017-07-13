@@ -7,7 +7,6 @@
 var SpotifyWebApi = require('spotify-web-api-node')
 var spotifyApi = new SpotifyWebApi()
 var Promise = require('es6-promise').Promise
-
 /////////////////////////////////////////////////
 
 //- instantiate
@@ -22,7 +21,27 @@ var vue = {
 	    })
 	},
 	mixins: [],
-	methods: {}
+	methods: {
+	    'getClientFlowToken':function(){
+	        return new Promise(function(resolve, reject){
+	            var self = this
+    	        $.ajax({
+    	            type: "GET",
+    	           // url:'https://boshes.github.io/Trax/config.php'
+    	           // url:"https://trax-boshes.c9users.io/config.php",
+    	            url: "http://localhost/trax/config.php",
+    	            success:function(data){
+    	                spotifyApi.setAccessToken(JSON.parse(data).access_token)
+    	                self.isTokenReady = true
+    	                resolve(self.isTokenReady)
+    	            },
+    	            error:function(err){
+    	                reject(err)
+    	            }
+    	        })
+	        }.bind(this))
+	    }
+	}
 }
 /////////////////////////////////////////////////
 
@@ -115,7 +134,6 @@ vue.methods.filterTracks = function(tracks){
             }
         }
     }
-    console.log("Available", availableTracks)
     this.$emit('data ready', availableTracks)
 }
 

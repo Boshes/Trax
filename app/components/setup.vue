@@ -35,6 +35,9 @@ export default {
 		'title':{
 			required: true
 		},
+		'token':{
+			required: true
+		},
 		'ready':{
 			required: true
 		}
@@ -44,7 +47,7 @@ export default {
 
 <template lang="jade">
 #setup
-	.container-fluid(v-if='ready')
+	.container-fluid(v-if='ready && token')
 		.col-sm-12.text-center
 			span.md-display-4(:style='{color: title}') Trax
 		br

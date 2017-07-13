@@ -53,6 +53,10 @@ export default {
 		'title': {
 			required: true	
 		},
+		'token':{
+			type: Boolean,
+			required: true
+		},
 		'ready':{
 			type: Boolean,
 			required: true
@@ -154,13 +158,13 @@ export default {
 <template lang="jade">
 #game
 	.container-fluid
-		md-spinner.center-block.spinnerShade(md-indeterminate, v-show='!isReady || !ready', :style='{color: title}')
+		md-spinner.center-block.spinnerShade(md-indeterminate, v-show='!isReady || !ready || !token', :style='{color: title}')
 		br
 		div.text-center
 			transition(name='slide-fade')
-				span.md-display-3(style='word-wrap: break-word;', v-if='isReady && ready', v-text='artist.name', :style='{color: title}')
+				span.md-display-3(style='word-wrap: break-word;', v-if='isReady && ready && token', v-text='artist.name', :style='{color: title}')
 			transition(name='slide-fade')
-				md-speed-dial.md-fab-top-right(v-if='isReady && ready', md-open="hover", md-theme='light-blue', md-direction="left", :style='{color: title}')
+				md-speed-dial.md-fab-top-right(v-if='isReady && ready && token', md-open="hover", md-theme='light-blue', md-direction="left", :style='{color: title}')
 					md-button.md-fab(md-fab-trigger)
 						md-icon(md-icon-morph) more_vert
 						md-icon more_horiz
@@ -184,7 +188,7 @@ export default {
 			br
 			br
 			transition(name='slide-fade')
-				div(v-if='isReady && ready', style='padding-top:20px;')
+				div(v-if='isReady && ready && token', style='padding-top:20px;')
 					.col-sm-12.center-block.no-padding
 						md-button.md-raised.dynamicButton.answerButton#button0(v-on:click.once.native.self='answerTrack(0)', :style='{color: body, backgroundColor: back}')
 							img.image(:src='availableTracks[0].album.images[2].url', v-on:click.once='answerTrack(0)')
@@ -211,7 +215,7 @@ export default {
 							md-icon.iconButton#volume3(v-on:click.native='playTrack(3)') music_note
 								md-tooltip(v-if='availableTracks[3].is_playable==false', md-direction='top') Unavailable
 			br
-			.col-sm-12.text-center.progressArea.no-padding(v-if='isReady && gameFinished && ready')
+			.col-sm-12.text-center.progressArea.no-padding(v-if='isReady && gameFinished && ready && token')
 				div(v-if='gameState==false')
 					.col-sm-6.center-block.no-padding
 						md-button.md-raised.dynamicButton#backButton(v-on:click.native='resetGame', :style='{color: body, backgroundColor: back}') Genre Selection
