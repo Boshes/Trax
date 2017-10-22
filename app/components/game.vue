@@ -193,27 +193,27 @@ export default {
 						md-button.md-raised.dynamicButton.answerButton#button0(v-on:click.once.native.self='answerTrack(0)', :style='{color: body, backgroundColor: back}')
 							img.image(:src='availableTracks[0].album.images[2].url', v-on:click.once='answerTrack(0)')
 							span(v-text='availableTracks[0].name', v-on:click.once='answerTrack(0)')
-							md-icon.iconButton#volume0(v-on:click.native='playTrack(0)') music_note
-								md-tooltip(v-if='availableTracks[0].is_playable==false', md-direction='top') Unavailable
+							md-icon.iconButton#volume0(v-on:click.native='playTrack(0)', v-if='availableTracks[0].preview_url!=null') music_note
+								md-tooltip(v-if='availableTracks[0].is_playable==false || !availableTracks[0].preview_url', md-direction='top') Unavailable
 					.col-sm-12.center-block.no-padding
 						.col-sm-6.center-block.no-padding
 							md-button.md-raised.dynamicButton.answerButton#button1(v-on:click.once.native.self='answerTrack(1)', :style='{color: body, backgroundColor: back}')
 								img.image(:src='availableTracks[1].album.images[2].url', v-on:click.once='answerTrack(1)')
 								span(v-text='availableTracks[1].name', v-on:click.once='answerTrack(1)')
-								md-icon.iconButton#volume1(v-on:click.native='playTrack(1)') music_note
-									md-tooltip(v-if='availableTracks[1].is_playable==false', md-direction='top') Unavailable
+								md-icon.iconButton#volume1(v-on:click.native='playTrack(1)', v-if='availableTracks[1].preview_url!=null') music_note
+									md-tooltip(v-if='availableTracks[1].is_playable==false || !availableTracks[1].preview_url', md-direction='top') Unavailable
 						.col-sm-6.center-block.no-padding
 							md-button.md-raised.dynamicButton.answerButton#button2(v-on:click.once.native.self='answerTrack(2)', :style='{color: body, backgroundColor: back}')
 								img.image(:src='availableTracks[2].album.images[2].url', v-on:click.once='answerTrack(2)')
 								span(v-text='availableTracks[2].name', v-on:click.once='answerTrack(2)')
-								md-icon.iconButton#volume2(v-on:click.native='playTrack(2)') music_note
-									md-tooltip(v-if='availableTracks[2].is_playable==false', md-direction='top') Unavailable
+								md-icon.iconButton#volume2(v-on:click.native='playTrack(2)', v-if='availableTracks[2].preview_url!=null') music_note
+									md-tooltip(v-if='availableTracks[2].is_playable==false || !availableTracks[2].preview_url', md-direction='top') Unavailable
 					.col-sm-12.center-block.no-padding
 						md-button.md-raised.dynamicButton.answerButton#button3(v-on:click.once.native.self='answerTrack(3)', :style='{color: body, backgroundColor: back}')
 							img.image(:src='availableTracks[3].album.images[2].url', v-on:click.once='answerTrack(3)')
 							span(v-text='availableTracks[3].name', v-on:click.once='answerTrack(3)')
-							md-icon.iconButton#volume3(v-on:click.native='playTrack(3)') music_note
-								md-tooltip(v-if='availableTracks[3].is_playable==false', md-direction='top') Unavailable
+							md-icon.iconButton#volume3(v-on:click.native='playTrack(3)', v-if='availableTracks[3].preview_url!=null') music_note
+								md-tooltip(v-if='availableTracks[3].is_playable==false || !availableTracks[3].preview_url', md-direction='top') Unavailable
 			br
 			.col-sm-12.text-center.progressArea.no-padding(v-if='isReady && gameFinished && ready && token')
 				div(v-if='gameState==false')

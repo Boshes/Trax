@@ -28,8 +28,8 @@ var vue = {
     	        $.ajax({
     	            type: "GET",
     	           // url:'https://boshes.github.io/Trax/config.php'
-    	           // url:"https://trax-boshes.c9users.io/config.php",
-    	            url: "http://localhost/trax/config.php",
+    	            url:"https://trax-boshes.c9users.io/config.php",
+    	           // url: "http://localhost/trax/config.php",
     	            success:function(data){
     	                spotifyApi.setAccessToken(JSON.parse(data).access_token)
     	                self.isTokenReady = true
@@ -134,6 +134,7 @@ vue.methods.filterTracks = function(tracks){
             }
         }
     }
+    console.log(availableTracks)
     this.$emit('data ready', availableTracks)
 }
 

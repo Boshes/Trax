@@ -86,7 +86,7 @@ var vue = {
 	    	}
 	    },
 	    playTrack:function(id){
-	    	if(this.availableTracks[id].is_playable){
+	    	if(this.availableTracks[id].is_playable && this.availableTracks[id].preview_url){
 		    	if(this.selectedSound!=id){
 		    		if(this.isSound==true){
 		    			this.trackSound.pause()
